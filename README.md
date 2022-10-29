@@ -18,7 +18,7 @@ Install Node.JS version `^18.` (Due to usage of native Fetch API)
 ### Usage
  - Rename `.env-template` to `.env` and fill the parameters values
  - Install the dependencies by running: `npm ci`
- - Build the project with following command: `npm build`
+ - Build the project with following command: `npm run build`
  - To run in production mode: `npm start`
  - To run in development mode: `npm run tsdev`
 
