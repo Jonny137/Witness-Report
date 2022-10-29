@@ -1,0 +1,107 @@
+openapi: 3.0.0
+info:
+  title: Witness Report Service
+  description: Service which handles collecting and storing witness reports.
+  version: 0.1.9
+servers:
+  - url: http://localhost/8080
+    description: Local development server
+paths:
+  /report:
+    post:
+      summary: Create a witness report.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MakeReportReq"
+      responses:
+        200:
+          description: Witness report successfully processed and stored in a file.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MakeReportRes"
+        400:
+          description: Bad request due to invalid phone number, case title or country.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestError'
+        422:
+          description: Error during body validation.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationError"
+        500:
+          description: Internal error during saving report to a file.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalServerError"
+
+
+components:
+  schemas:
+    InternalServerError:
+      type: object
+      description: Internal server error.
+      properties:
+        httpCode:
+          type: integer
+          example: 500
+        message:
+           type: string
+           example: Internal Server Error.
+           
+    ValidationError:
+      type: object
+      description: Error during request body validation.
+      properties:
+        httpCode:
+          type: integer
+          example: 422
+        message:
+           type: string
+           example: Validation Error.
+    
+    BadRequestError:
+      type: object
+      description: User bad request error..
+      properties:
+        httpCode:
+          type: integer
+          example: 400
+        message:
+           type: string
+           example: Bad Request.
+
+
+    MakeReportReq:
+      type: object
+      properties:
+        title:
+          type: string
+          example: CHRISTOPHER SLIGHTAM
+        phoneNumber:
+          type: string
+          example: +1-212-456-7890
+      required:
+        - username
+        - password
+    
+    MakeReportRes:
+      type: object
+      properties:
+        title:
+          type: string
+          example: CHRISTOPHER SLIGHTAM
+        phoneNumber:
+          type: string
+          example: +1-212-456-7890
+        country:
+          type: string
+          example: United States
+    
