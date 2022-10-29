@@ -21,3 +21,6 @@ Install Node.JS version `^18.` (Due to usage of native Fetch API)
  - Build the project with following command: `npm build`
  - To run in production mode: `npm start`
  - To run in development mode: `npm run tsdev`
+
+### Documentation
+ - To view service documentation (openapi) navigate to `/api-docs` route
